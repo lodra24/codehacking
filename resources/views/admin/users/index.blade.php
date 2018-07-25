@@ -24,7 +24,8 @@
 
                 <tr>
                     <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
+                    <td><img height="50" src="{{$user->photo ? $user->photo->file : 'https://www.livetracklist.com/wp-content/uploads/2016/05/charlotte-de-witte-live-pic.jpg'}}"/></td>
+                    <td><a href="{{route('admin.users.edit', $user->id)}}">{{$user->name}}</a></td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->name}}</td>
                     <td>
