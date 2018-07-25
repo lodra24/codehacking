@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UsersRequest;
+use App\Photo;
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -43,9 +44,26 @@ class AdminUsersController extends Controller
     public function store(UsersRequest $request)
     {
 
-       User::create($request->all());
+      $input = $request->all();
 
-        //return $request->all();
+       if($request->hasFile('photo_id')){
+
+           $file = $request->file('photo_id');
+           $name = time() . $file->getClientOriginalName();
+
+           $file->move('images',$name);
+
+           $photo = Photo::create(['file'=>$name]);
+
+           $input['photo_id'] = $photo->id;
+
+       }
+
+      $input['password'] = bcrypt($request->password);
+
+       User::create($input);
+       return redirect('/admin/users');
+
     }
 
     /**
