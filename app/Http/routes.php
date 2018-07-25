@@ -21,7 +21,8 @@ Route::get('/home', 'HomeController@index');
 
 Route::get('/admin',function (){
 
-   return view('admin.index');
+    $title = "Admin";
+    return view('admin.index',compact('title'));
 });
 
 Route::resource('admin/users', 'AdminUsersController');
