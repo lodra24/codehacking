@@ -19,10 +19,16 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/admin',function (){
+Route::get('/admin', function () {
 
     $title = "Admin";
-    return view('admin.index',compact('title'));
+    return view('admin.index', compact('title'));
 });
 
-Route::resource('admin/users', 'AdminUsersController');
+Route::group(['middleware' => 'admin'], function () {
+
+
+    Route::resource('admin/users', 'AdminUsersController');
+});
+
+
