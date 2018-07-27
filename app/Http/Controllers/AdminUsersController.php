@@ -147,6 +147,7 @@ class AdminUsersController extends Controller
     {
         $user =  User::findOrFail($id);
 
+        if ($user->photo_id != 0)
         unlink(public_path() . $user->photo->file); //resmin de silinmesini sağlıyoruz.
 
         $user->delete(); //kullanıcıyı siliyoruz

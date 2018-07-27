@@ -14,17 +14,24 @@ class CreatePostsTable extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
 
-            //unsigned ve index sırasıyla negatif bir rakam almaması ve hızlı aranmasını sağlar.
 
+            //unsigned ve index sırasıyla negatif bir rakam almaması ve hızlı aranmasını sağlar.
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->index();
+            $table->integer('user_id')->unsigned();
             $table->integer('category_id')->unsigned()->index();
             $table->integer('photo_id')->unsigned()->index();
             $table->string('title');
             $table->text('body');
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
+
         });
+
+
+
+
     }
 
     /**
