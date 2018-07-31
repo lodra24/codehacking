@@ -4,7 +4,7 @@
 
 
 
-    @if(count($comments) > 0)
+    @if(count($comments))
 
         <h1>Comments</h1>
 
