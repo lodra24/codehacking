@@ -25,7 +25,8 @@
 
                 <tr>
                     <td>{{$post->id}}</td>
-                    <td><img height="100" width="100" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""></td>
+                    <td><img height="100" width="100"
+                             src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""></td>
                     <td><a href="{{route('admin.posts.edit', $post->id )}}">{{$post->user->name}}</a></td>
                     <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
                     <td>{{$post->title}}</td>
@@ -42,5 +43,11 @@
 
         </tbody>
     </table>
+
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-5">
+            {{$posts->render()}} <!-- Pagination için bu kodu yazıyoruz. -->
+        </div>
+    </div>
 
 @stop

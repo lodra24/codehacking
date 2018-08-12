@@ -1,7 +1,6 @@
 @extends('layouts.blog-post')
 
 @section('content')
-
     <!-- Title -->
     <h1>{{$post->title}}</h1>
 
@@ -64,62 +63,68 @@
 
 
     @if(count($comments) > 0)
-
         @foreach($comments as $comment)
             <!-- Comment -->
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img height="64" class="media-object" src="http://placehold.it/250x250" alt="">
+                    <img height="64" class="media-object" src="{{Auth::user()->gravatar}}" alt=""> <!-- Gravatar.com'dan avatarı gösteriyoruz -->
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading">{{$comment->author}}
                         <small>{{$comment->created_at->diffForHumans()}}</small>
                     </h4>
                     <p>{{$comment->body}}</p>
+                    <div class="comment-reply-container">
+                        <div class="comment-reply col-sm-6">
+
+
+                            {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
+                            <input type="hidden" name="comment_id" value="{{$comment->id}}"/>
+                            <div class="form-group">
+                                {!! Form::textarea('body', null, ['class'=> 'form-control','rows'=>1]) !!}
+                            </div>
+
+                            <div class="form-group">
+                                {!! Form::submit('Create Post', ['class'=> 'btn btn-primary']) !!}
+                            </div>
+                            {!! Form::close() !!}
+                        </div>
+                        <!-- End Nested Comment -->
+                    </div>
+
+                    <button style="margin-top:-35px;" class="toggle-reply btn btn-primary pull-right">Reply
+                    </button>
 
                 @if(count($comment->replies) > 0)
                     @foreach($comment->replies as $reply)
 
-                        <!-- Nested Comment -->
-                            <div id="nested-comment" class=" media">
-                                <a class="pull-left" href="#">
-                                    <img height="64" class="media-object" src="http://placehold.it/64x64" alt="">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">{{$reply->author}}
-                                        <small>{{$reply->created_at->diffForHumans()}}</small>
-                                    </h4>
-                                    <p>{{$reply->body}}</p>
-                                </div>
-                                <div class="comment-reply-container">
-                                    <button class="toggle-reply btn btn-primary pull-right">Reply</button>
-                                    <div class="comment-reply col-sm-6">
+                        @if($reply->is_active == 1)
 
-
-                                        {!! Form::open(['method'=>'POST', 'action'=> 'CommentRepliesController@createReply']) !!}
-                                        <input type="hidden" name="comment_id" value="{{$comment->id}}"/>
-                                        <div class="form-group">
-                                            {!! Form::textarea('body', null, ['class'=> 'form-control','rows'=>1]) !!}
-                                        </div>
-
-                                        <div class="form-group">
-                                            {!! Form::submit('Create Post', ['class'=> 'btn btn-primary']) !!}
-                                        </div>
-                                        {!! Form::close() !!}
+                            <!-- Nested Comment -->
+                                <div id="nested-comment" class=" media">
+                                    <a class="pull-left" href="#">
+                                        <img height="64" class="media-object" src="{{Auth::user()->gravatar}}"
+                                             alt="">
+                                    </a>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">{{$reply->author}}
+                                            <small>{{$reply->created_at->diffForHumans()}}</small>
+                                        </h4>
+                                        <p>{{$reply->body}}</p>
                                     </div>
-                                    <!-- End Nested Comment -->
+                                    @endif
+                                    @endforeach
                                 </div>
-
-                                @endforeach
-                            </div>
                             @endif
 
                 </div>
-                @endforeach
-                @endif
-
-
             </div>
+        @endforeach
+
+    @endif
+
+
+
 
 
 
@@ -128,9 +133,9 @@
 @section('scripts')
 
     <script>
-        $(".comment-reply-container .toggle-reply").click(function () {
+        $(".toggle-reply").click(function () {
 
-            $(this).next().slideToggle("slow");
+            $('.comment-reply').slideToggle('slow');
         });
     </script>
 

@@ -49,4 +49,13 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
 
+    //Gravatar sitesinde eğer resmi bulunan bir kişi yorum yaparsa, onun resmini yorumlarda gösteriyoruz.
+
+    public function getGravatarAttribute(){
+
+        $hash = md5(strtolower(trim($this->attributes['email'])));
+
+        return "http://www.gravatar.com/avatar/$hash";
+    }
+
 }

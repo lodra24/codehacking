@@ -29,6 +29,7 @@
                     <td>{{$comment->email}}</td>
                     <td>{{$comment->body}}</td>
                     <td><a href="{{route('home.post' , $comment->post->id)}}"> {{$comment->post->title}}</a></td>
+                    <td><a href="{{route('admin.comments.replies.show' , $comment->id)}}">View Replies</a></td>
                     <td>
                         <!--Eğer yorum aktifse, onu tekrar deaktif yapabiliriz. Eğer deaktifse aktif yapabiliriz. -->
                         @if($comment->is_active == 1)

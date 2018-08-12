@@ -32,7 +32,8 @@
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -65,23 +66,15 @@
     <div class="row">
 
         <!-- Blog Post Content Column -->
-        <div class="col-lg-8">
 
+        <div class="col-sm-8">
             @yield('content')
-
-
-
 
         </div>
 
 
-
-
-
-
-
         <!-- Blog Sidebar Widgets Column -->
-        <div class="col-md-4">
+        <div class="col-sm-4">
 
             <!-- Blog Search Well -->
             <div class="well">
@@ -132,7 +125,8 @@
             <!-- Side Widget Well -->
             <div class="well">
                 <h4>Side Widget Well</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus
+                    laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
             </div>
 
         </div>
@@ -161,9 +155,6 @@
 
 
 @yield('scripts')
-
-
-
 
 
 </body>

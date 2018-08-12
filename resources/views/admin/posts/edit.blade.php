@@ -8,7 +8,7 @@
     <div class="row">
 
         <div class="col-sm-3">
-            <img class="img-responsive" src="{{$post->photo->file}}" alt="">
+          <  <img class="img-responsive" src="{{$post->photo->file}}" alt="">
 
         </div>
 
