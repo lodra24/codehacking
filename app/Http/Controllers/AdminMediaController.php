@@ -35,11 +35,12 @@ class AdminMediaController extends Controller
 
         $file->move('images', $name);
 
-        Photo::create(['file'=>$name]);
+        Photo::create(['file' => $name]);
     }
 
 
-    public function destroy($id){
+    public function destroy($id)
+    {
 
         $photo = Photo::findOrFail($id);
 
@@ -49,7 +50,32 @@ class AdminMediaController extends Controller
 
         Session::flash('deleted_photo', 'The photo has been deleted successfully');
 
-        return redirect('admin/media');
+        // return redirect('admin/media');
+    }
+
+    public function deleteMedia(Request $request)
+    {
+
+
+        if (isset($request->delete_single)) {
+
+            $this->destroy($request->photo);
+            return redirect()->back();
+        }
+
+        if (isset($request->delete_all) && !empty($request->checkBoxArray)) {
+
+            $photos = Photo::findOrFail($request->checkBoxArray);
+
+            foreach ($photos as $photo) {
+
+                $photo->delete();
+            }
+
+            return redirect()->back();
+        }
+
+
     }
 
 }

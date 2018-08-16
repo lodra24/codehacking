@@ -16,11 +16,11 @@
 
     <hr>
     <!-- Preview Image -->
-    <img src="{{$post->photo->file}}" alt="" class="img-responsive">
+    <img src="{{$post->photo ? $post->photo->file : $post->photoPlaceholder()}}" alt="" class="img-responsive">
 
     <hr>
     <!-- Post Content -->
-    <p>{{$post->body}}</p>
+    <p>{!! $post->body !!}</p>
 
     <hr>
 
